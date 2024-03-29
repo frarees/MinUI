@@ -102,9 +102,9 @@ extern int is_plus;
 
 ///////////////////////////////
 
-#define FIXED_SCALE 	2
-#define FIXED_WIDTH		640
-#define FIXED_HEIGHT	480
+#define FIXED_SCALE 		2
+#define FIXED_WIDTH		752
+#define FIXED_HEIGHT		560
 #define FIXED_BPP		2
 #define FIXED_DEPTH		(FIXED_BPP * 8)
 #define FIXED_PITCH		(FIXED_WIDTH * FIXED_BPP)

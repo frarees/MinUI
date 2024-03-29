@@ -139,7 +139,7 @@ int main(void) {
 	
 	memset(fb0_map, 0, map_size); // clear screen
 	
-	SDL_Surface* img = IMG_Load("/mnt/SDCARD/.system/res/charging-640-480.png"); // 24-bit opaque png
+	SDL_Surface* img = IMG_Load("/mnt/SDCARD/.system/res/charging-752-560.png"); // 24-bit opaque png
 	
 	uint8_t* dst = (uint8_t*)fb0_map; // rgba
 	uint8_t* src = (uint8_t*)img->pixels; // bgr

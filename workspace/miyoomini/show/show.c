@@ -22,7 +22,7 @@ int main(int argc , char* argv[]) {
 	int fb0_fd = open("/dev/fb0", O_RDWR);
 	struct fb_var_screeninfo vinfo;
 	ioctl(fb0_fd, FBIOGET_VSCREENINFO, &vinfo);
-	int map_size = vinfo.xres * vinfo.yres * (vinfo.bits_per_pixel / 8); // 640x480x4
+	int map_size = vinfo.xres * vinfo.yres * (vinfo.bits_per_pixel / 8); // 752x560x4
 	char* fb0_map = (char*)mmap(0, map_size, PROT_READ | PROT_WRITE, MAP_SHARED, fb0_fd, 0);
 	memset(fb0_map, 0, map_size); // clear screen
 	

@@ -121,12 +121,12 @@ char* getrecent(char *filename) {
 }
 
 //
-//	Screenshot (640x480, rotate180, png)
+//	Screenshot (752x560, rotate180, png)
 //
 void screenshot(void) {
 	char		screenshotname[512];
 	uint32_t	*buffer, *src;
-	uint32_t	linebuffer[640], x, y, pix;
+	uint32_t	linebuffer[752], x, y, pix;
 	FILE		*fp;
 	int		fd_fb;
 	struct		fb_var_screeninfo vinfo;
@@ -134,11 +134,11 @@ void screenshot(void) {
 	png_infop	info_ptr;
 
 	if (getrecent(screenshotname) == NULL) return;
-	if ((buffer = (uint32_t*)malloc(640*480*4)) != NULL) {
+	if ((buffer = (uint32_t*)malloc(752*560*4)) != NULL) {
 		fd_fb = open("/dev/fb0", O_RDWR);
 		ioctl(fd_fb, FBIOGET_VSCREENINFO, &vinfo);
-		lseek(fd_fb, 640*vinfo.yoffset*4, SEEK_SET);
-		read(fd_fb, buffer, 640*480*4);
+		lseek(fd_fb, 752*vinfo.yoffset*4, SEEK_SET);
+		read(fd_fb, buffer, 752*560*4);
 		close(fd_fb);
 
 		fp = fopen(screenshotname, "wb");
@@ -146,12 +146,12 @@ void screenshot(void) {
 			png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, 0, 0, 0);
 			info_ptr = png_create_info_struct(png_ptr);
 			png_init_io(png_ptr, fp);
-			png_set_IHDR(png_ptr, info_ptr, 640, 480, 8, PNG_COLOR_TYPE_RGBA,
+			png_set_IHDR(png_ptr, info_ptr, 752, 560, 8, PNG_COLOR_TYPE_RGBA,
 				PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 			png_write_info(png_ptr, info_ptr);
-			src = buffer + 640*480;
-			for (y=0; y<480; y++) {
-				for (x=0; x<640; x++){
+			src = buffer + 752*560;
+			for (y=0; y<560; y++) {
+				for (x=0; x<752; x++){
 					pix = *--src;
 					linebuffer[x] = 0xFF000000 | (pix & 0x0000FF00) | (pix & 0x00FF0000)>>16 | (pix & 0x000000FF)<<16;
 				}
